@@ -26,6 +26,7 @@ header, .navbar {
     top: 0;
     width: 100%;
     z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .navbar .container {
@@ -54,7 +55,7 @@ header, .navbar {
 }
 
 .hero {
-    background: linear-gradient(135deg, #282c34, #3c3f47);
+    background: url('hero-background.jpg') no-repeat center center/cover;
     color: #fff;
     height: 100vh;
     display: flex;
@@ -62,18 +63,34 @@ header, .navbar {
     align-items: center;
     text-align: center;
     padding: 0 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay for text visibility */
+}
+
+.hero h1, .hero p, .cta {
+    z-index: 1; /* Ensure text and button are above the overlay */
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
-    animation: fadeInUp 1s ease-in-out;
+    animation: fadeInDown 1s ease-in-out;
 }
 
 .hero p {
     font-size: 1.5rem;
     margin-bottom: 2rem;
-    animation: fadeInUp 1.5s ease-in-out;
+    animation: fadeInDown 1.5s ease-in-out;
 }
 
 .cta {
@@ -83,7 +100,7 @@ header, .navbar {
     color: #fff;
     border-radius: 50px;
     transition: background 0.3s ease, transform 0.3s ease;
-    animation: fadeInUp 2s ease-in-out;
+    animation: fadeInDown 2s ease-in-out;
 }
 
 .cta:hover {
@@ -102,12 +119,12 @@ header, .navbar {
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 1.5rem;
     text-align: center;
     color: #333;
     position: relative;
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeInUp 1s ease-in-out;
 }
 
 p {
@@ -122,6 +139,11 @@ p {
     margin: 0 auto 2rem;
     display: block;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.profile-picture:hover {
+    transform: scale(1.1);
 }
 
 .project-grid {
@@ -132,18 +154,45 @@ p {
 }
 
 .project-card {
-    background: #f9f9f9;
+    background: #fff;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     flex: 1 1 30%;
     animation: fadeIn 1.5s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card h3 {
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
 }
 
 .project-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.project-card:hover h3 {
+    color: #ff6347;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 99, 71, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover::before {
+    opacity: 1;
 }
 
 footer {
@@ -154,9 +203,21 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Keyframes for animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
